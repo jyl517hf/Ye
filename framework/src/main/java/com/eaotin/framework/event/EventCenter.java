@@ -1,6 +1,6 @@
 package com.eaotin.framework.event;
 
-import com.qucai.guess.framework.util.ListUtil;
+import com.eaotin.framework.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,10 +93,7 @@ public class EventCenter {
             listeners = ListUtil.clone(mListeners);
         }
         for (EventListenerPackage pack : listeners) {
-            if (pack.id == EventId.eAll) {
-                pack.listener.onEvent(id, args);
-            }
-            if (pack.id == id) {
+            if (pack.id == EventId.eAll || pack.id == id) {
                 pack.listener.onEvent(id, args);
             }
         }

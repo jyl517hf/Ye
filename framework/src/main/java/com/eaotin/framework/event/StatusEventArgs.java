@@ -6,13 +6,13 @@ package com.eaotin.framework.event;
  */
 public class StatusEventArgs extends EventArgs {
 
-    private OperErrorCode mErrCode = OperErrorCode.None;
+    private int resultCode;
 
-    public StatusEventArgs(OperErrorCode errCode) {
-        mErrCode = errCode;
+    public StatusEventArgs(int resultCode) {
+        this.resultCode =resultCode;
     }
 
-    public OperErrorCode getErrCode() {
-        return mErrCode;
+    public int getErrCode() {
+        return resultCode;
     }
 }

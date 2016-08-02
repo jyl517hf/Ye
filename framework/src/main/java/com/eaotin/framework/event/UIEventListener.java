@@ -2,10 +2,7 @@ package com.eaotin.framework.event;
 
 import android.app.Activity;
 
-import com.qucai.guess.framework.ui.base.BaseActivity;
-import com.qucai.guess.framework.ui.base.BaseFragment;
-import com.qucai.guess.framework.ui.base.BaseFragmentActivity;
-import com.qucai.guess.framework.ui.base.BaseFragmentV4;
+import com.eaotin.framework.base.BaseActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,41 +13,21 @@ import java.util.Map;
 public class UIEventListener implements EventListener {
 
     private Activity mActivity = null;
-    private BaseFragment mFragment = null;
     private EventListener mListener = null;
-
-    private BaseFragmentV4 mBaseFragmentV4= null;
 
     public UIEventListener(Activity activity, EventListener listener) {
         mActivity = activity;
         mListener = listener;
     }
 
-    public UIEventListener(BaseFragmentV4 baseFragmentV4, EventListener listener) {
-        mBaseFragmentV4 = baseFragmentV4;
-        mListener = listener;
-    }
-
-    public UIEventListener(BaseFragment fragment, EventListener listener) {
-        mFragment = fragment;
-        mListener = listener;
-    }
-
     @Override
-    public void onEvent(EventId id, EventArgs args) {
+    public void onEvent(EventId eventId,EventArgs args) {
         if (mActivity != null) {
             if ( mActivity.getClass()==BaseActivity.class && !((BaseActivity)mActivity).isCreated()) {
                 return;
-            }else if(mActivity.getClass()==BaseFragmentActivity.class && !((BaseFragmentActivity)mActivity).isCreated()){
-                return;
             }
         }
-        if (mFragment != null) {
-            if (!mFragment.isActivityCreated()) {
-                return;
-            }
-        }
-        mListener.onEvent(id, args);
+        mListener.onEvent(eventId,args);
     }
 
     public static class Helper {
@@ -63,29 +40,10 @@ public class UIEventListener implements EventListener {
             mActivity = value;
         }
 
-        private BaseFragment mFragement = null;
-
-        public void setHost(BaseFragment value) {
-            mFragement = value;
-        }
-
-        private BaseFragmentV4 baseFragmentV4= null;
-        public void setHost(BaseFragmentV4 value) {
-            baseFragmentV4 = value;
-        }
-
-
 
         public UIEventListener createUIEventListener(EventListener listener) {
             if (mActivity != null) {
                 return new UIEventListener(mActivity, listener);
-            }
-            if (mFragement != null) {
-                return new UIEventListener(mFragement, listener);
-            }
-
-            if (baseFragmentV4!=null){
-                return new UIEventListener(baseFragmentV4, listener);
             }
             return null;
         }
