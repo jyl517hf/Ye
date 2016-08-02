@@ -1,10 +1,10 @@
-package com.eaotin.framework.protocol.base;
+package com.eaotin.framework.base;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
-import com.eaotin.framework.protocol.http.HttpComm;
-import com.eaotin.framework.protocol.http.ResponseListener;
+import com.eaotin.framework.http.HttpComm;
+import com.eaotin.framework.http.ResponseListener;
 import com.eaotin.framework.util.LoggerUtil;
 
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.eaotin.framework.protocol.http;
+package com.eaotin.framework.http;
 
 import android.text.TextUtils;
 
@@ -17,8 +17,17 @@ import java.net.URL;
  */
 public class HttpComm {
     private final static String SERVER_URL = "http://uat.b.quancome.com/platform/api";
+    /**
+     * 请求方式,统一使用POST
+     */
     private final static String REQUEST_METHOD = "POST";
+    /**
+     * 编码方式UTF-8
+     */
     private final static String ENCODE_TYPE = "UTF-8";
+    /**
+     * 15秒超时时间
+     */
     private final static int TIME_OUT = 15000;
     private static HttpComm instance = null;
 

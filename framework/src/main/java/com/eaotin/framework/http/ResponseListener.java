@@ -1,4 +1,4 @@
-package com.eaotin.framework.protocol.http;
+package com.eaotin.framework.http;
 
 /**
  * ResponseListener.java是Http响应监听接口

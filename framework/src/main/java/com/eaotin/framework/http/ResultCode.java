@@ -1,4 +1,4 @@
-package com.eaotin.framework.protocol.http;
+package com.eaotin.framework.http;
 
 /**
  * ResultCode.java是用于网络请求的结果码常量类
