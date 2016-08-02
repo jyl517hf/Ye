@@ -1,1 +1,1 @@
-include ':app', ':logic', ':model', ':protocol', ':util'
+include ':app', ':framework'
