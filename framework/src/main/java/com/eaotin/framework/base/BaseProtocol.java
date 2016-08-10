@@ -22,6 +22,8 @@ public abstract class BaseProtocol {
     private final String clazz = getClass().getSimpleName();
     private static final LoggerUtil logger = new LoggerUtil("protocol");
 
+    private int resultCode;
+
     /**
      * 获得请求地址
      */
@@ -41,6 +43,14 @@ public abstract class BaseProtocol {
      * 获得测试用假数据
      */
     abstract protected String getFakeResult();
+
+    public int getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
 
     /**
      * 执行Http请求
@@ -73,9 +83,9 @@ public abstract class BaseProtocol {
 
         @Override
         protected Void doInBackground(Void... params) {
-//            //从相对路径拼为绝对路径
-//            String url = Const.BASE_URL + getRequestUrl();
-//            //加入TOKEN参数
+            //从相对路径拼为绝对路径
+            String url = "http://www.uguess.me" + getRequestUrl();
+            //加入TOKEN参数
 //            User cacheUser = Cache.getInstance().getUser();
 //            String token;
 //            if (cacheUser == null) {
@@ -83,7 +93,6 @@ public abstract class BaseProtocol {
 //            } else {
 //                token = cacheUser.getToken();
 //            }
-            String url = "www.baicu.com";
 //            if (url.indexOf("?") == -1) {
 //                url = url + "?t=" + token;
 //            } else {
@@ -100,7 +109,8 @@ public abstract class BaseProtocol {
             logger.d(String.format("recv name:%s url:%s result:%s", clazz, url, result));
             try {
                 JSONObject o = new JSONObject(result);
-                onResult(o);
+                setResultCode(o.optInt("resultCode"));
+                onResult(o.optJSONObject("body"));
             } catch (JSONException e) {
                 logger.d("recv response url:" + url + "; fail");
                 e.printStackTrace();

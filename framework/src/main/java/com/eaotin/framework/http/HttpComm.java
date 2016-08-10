@@ -16,7 +16,6 @@ import java.net.URL;
  * 进行Http网络连接建立的类
  */
 public class HttpComm {
-    private final static String SERVER_URL = "http://uat.b.quancome.com/platform/api";
     /**
      * 请求方式,统一使用POST
      */
@@ -56,7 +55,7 @@ public class HttpComm {
     public String post(String url, String param) {
         String result = null;
         //获得Http网络链接
-        HttpURLConnection urlConnection = getConnection();
+        HttpURLConnection urlConnection = getConnection(url);
         try {
             urlConnection.connect();
             if (urlConnection.getRequestMethod().equals(REQUEST_METHOD) && !TextUtils.isEmpty(param)) {
@@ -101,12 +100,12 @@ public class HttpComm {
      *
      * @return HttpURLConnection
      */
-    private HttpURLConnection getConnection() {
+    private HttpURLConnection getConnection(String urlString) {
         HttpURLConnection connection = null;
         // 初始化connection
         try {
             // 根据地址创建URL对象
-            URL url = new URL(SERVER_URL);
+            URL url = new URL(urlString);
             // 根据URL对象打开链接
             connection = (HttpURLConnection) url.openConnection();
             // 设置请求的方式

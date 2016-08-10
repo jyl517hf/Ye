@@ -5,7 +5,14 @@ import com.eaotin.framework.util.ListUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 事件中心类,用于处理所有事件的发送以及传递,该类是单例的
+ */
 public class EventCenter {
+
+    private EventCenter() {
+
+    }
 
     private static EventCenter ins = new EventCenter();
 
@@ -13,6 +20,9 @@ public class EventCenter {
         return ins;
     }
 
+    /**
+     * 时间打包类的List集合
+     */
     private List<EventListenerPackage> mListeners = new ArrayList<>();
 
     /**
@@ -87,7 +97,6 @@ public class EventCenter {
      * @param args
      */
     public void fireEvent(EventId id, EventArgs args) {
-
         List<EventListenerPackage> listeners = null;
         synchronized (mListeners) {
             listeners = ListUtil.clone(mListeners);
@@ -99,6 +108,13 @@ public class EventCenter {
         }
     }
 
+    /**
+     * 通过事件id和事件监听器判定是否已经存在了该事件的监听
+     *
+     * @param id
+     * @param listener
+     * @return
+     */
     private boolean hasListener(EventId id, EventListener listener) {
         for (EventListenerPackage pack : mListeners) {
             if (pack.id == id && pack.listener == listener) {
@@ -108,6 +124,9 @@ public class EventCenter {
         return false;
     }
 
+    /**
+     * 事件包的内部类,包含事件id和事件监听器
+     */
     private static class EventListenerPackage {
         public EventListenerPackage(EventId id, EventListener listener) {
             this.id = id;

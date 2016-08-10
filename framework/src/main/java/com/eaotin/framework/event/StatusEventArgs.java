@@ -2,17 +2,28 @@ package com.eaotin.framework.event;
 
 /**
  * 有状态事件参数
- * Created by Mark on 2015/1/9.
  */
 public class StatusEventArgs extends EventArgs {
-
+    /**
+     * 返回结果码
+     */
     private int resultCode;
 
+    /**
+     * 构造参数
+     *
+     * @param resultCode
+     */
     public StatusEventArgs(int resultCode) {
-        this.resultCode =resultCode;
+        this.resultCode = resultCode;
     }
 
-    public int getErrCode() {
+    /**
+     * 获取返回结果码的接口
+     *
+     * @return
+     */
+    public int getResultCode() {
         return resultCode;
     }
 }

@@ -31,6 +31,12 @@ public class BaseLogic {
         fireEventWithArgs(listener, new StatusEventArgs(resultCode));
     }
 
+    /**
+     * 通过事件ID将事件发送到UI层
+     *
+     * @param eventId
+     * @param args
+     */
     protected void fireEventWithEventId(final EventId eventId, final EventArgs args) {
         handler.post(new Runnable() {
 

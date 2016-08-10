@@ -9,5 +9,4 @@ package com.eaotin.framework.event;
  */
 public  class EventArgs {
 
-
 }
