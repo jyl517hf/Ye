@@ -3,7 +3,7 @@ package com.eaotin.framework.base;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
-import com.eaotin.framework.http.HttpComm;
+import com.eaotin.framework.http.OkHttpConnection;
 import com.eaotin.framework.http.ResponseListener;
 import com.eaotin.framework.util.LoggerUtil;
 
@@ -104,14 +104,17 @@ public abstract class BaseProtocol {
             }
             logger.d(String.format("send name:%s url:%s param:%s",
                     clazz, url, parameter));
-            final HttpComm comm = HttpComm.getInstance();
-            String result = comm.post(url, parameter);
-            logger.d(String.format("recv name:%s url:%s result:%s", clazz, url, result));
             try {
+                final OkHttpConnection comm = new OkHttpConnection();
+                String result = comm.post(url,parameter);
+                logger.d(String.format("recv name:%s url:%s result:%s", clazz, url, result));
                 JSONObject o = new JSONObject(result);
                 setResultCode(o.optInt("resultCode"));
                 onResult(o.optJSONObject("body"));
             } catch (JSONException e) {
+                logger.d("recv response url:" + url + "; fail");
+                e.printStackTrace();
+            }catch (Exception e){
                 logger.d("recv response url:" + url + "; fail");
                 e.printStackTrace();
             }

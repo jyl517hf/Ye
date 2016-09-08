@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/custom_action_bar_root"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/bg_action_bar"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:layout_width="@dimen/action_bar_width"
+        android:layout_height="match_parent"
+        android:background="@color/common_transpant"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/bg_action_bar_text_color"
+        android:textSize="@dimen/action_bar_text_size"
+        tools:text="优猜">
+
+
+    </TextView>
+
+    <ImageButton
+        android:layout_width="@dimen/action_bar_width"
+        android:layout_height="match_parent"
+        android:background="@color/common_transpant"
+
+        />
+</LinearLayout>
